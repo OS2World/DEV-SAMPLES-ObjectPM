@@ -1,0 +1,39 @@
+# VCS_ID
+# $Filename:   makefile.bor
+# $Author  :   John Pompeii
+# $Revision:   1.1  $
+# $Date:   28 Dec 1991 14:20:38  $
+#
+# Copyright (c)	1995 by Secant Technologies
+#
+#
+	 
+# Collection makefile for Borland C++ 
+# usage: make all, cmapdemo.exe, mapdemo.exe, or listdemo.exe
+
+INCLUDE=$(BCBASE)\include
+INCLUDPM=$(OPMBASE)\include
+LIB=$(BCBASE)\lib
+LIBPM=$(OPMBASE)\lib
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-c -sm -v -V -Od -I$(INCLUDE) -I$(INCLUDPM) 
+TLFLAGS=-c -m -Toe -v   
+!ELSE
+CPPFLAGS=-c -sm -V -I$(INCLUDE) -I$(INCLUDPM)
+TLFLAGS=-c -m -Toe  
+!ENDIF
+
+.cpp.obj:
+    bcc $(CPPFLAGS) $*.cpp
+
+all: listdemo.exe mapdemo.exe cmapdemo.exe
+
+cmapdemo.exe: cmapdemo.obj cmapdemo.def
+    tlink $(TLFLAGS) $(LIB)\c02 cmapdemo, cmapdemo, cmapdemo, $(LIB)\c2mt1i $(LIB)\os2 $(LIBPM)\bsebci, cmapdemo.def
+
+mapdemo.exe: mapdemo.obj mapdemo.def
+    tlink $(TLFLAGS) $(LIB)\c02 mapdemo, mapdemo, mapdemo, $(LIB)\c2mt1i $(LIB)\os2 $(LIBPM)\bsebci, mapdemo.def
+
+listdemo.exe: listdemo.obj listdemo.def
+    tlink $(TLFLAGS) $(LIB)\c02 listdemo, listdemo, listdemo, $(LIB)\c2mt1i $(LIB)\os2 $(LIBPM)\bsebci, listdemo.def
+

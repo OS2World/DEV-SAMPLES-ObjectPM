@@ -1,0 +1,44 @@
+#    VCS_ID
+#    $Filename:   makefile.mw
+#    $Author  :   chas 
+#    $Revision:   1.1  $
+#    $Date:   25 Feb  1995 14:20:38  $
+# 
+# 	Copyright (c)	1995 by Secant Technologies
+ 
+ 
+ 
+# Collection makefile for HighC
+# usage: make all, cmapdemo.exe, mapdemo.exe, or listdemo.exe
+
+INCLUDE=$(HCDIR)\inc
+INCLUDEPM=$(OPMBASE)\include
+LIB=$(HCDIR)\lib
+LIBPM=$(OPMBASE)\lib
+HC=$(HCDIR)\bin\hc.exe
+
+LIBS=$(LIBPM)\opmhci $(LIB)\hcctd $(LIB)\hctd $(LIB)\hcna $(LIB)\os2386
+STARTUP=$(LIB)\startup $(LIB)\globinit
+
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-g -I$(INCLUDE) -I$(INCLUDEPM)
+LINKFLAGS=/noignore /noext /align:16 /pm:vio /debug /map
+!ELSE
+CPPFLAGS=-O -I$(INCLUDE) -I$(INCLUDEPM)
+LINKFLAGS=/noignore /noext /align:16 /pm:vio /packdata
+!ENDIF
+
+.cpp.obj:
+    $(HC) -c $(CPPFLAGS) $*.cpp
+
+all: listdemo.exe mapdemo.exe cmapdemo.exe
+
+cmapdemo.exe: cmapdemo.obj cmapdemo.def
+    link386 $(LINKFLAGS) cmapdemo $(STARTUP),,,$(LIBS);
+
+mapdemo.exe: mapdemo.obj mapdemo.def
+    link386 $(LINKFLAGS) mapdemo  $(STARTUP),,,$(LIBS);
+
+listdemo.exe: listdemo.obj listdemo.def
+    link386 $(LINKFLAGS) listdemo $(STARTUP),,,$(LIBS);
+

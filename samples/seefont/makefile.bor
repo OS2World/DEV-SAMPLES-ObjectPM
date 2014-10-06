@@ -1,0 +1,38 @@
+#   VCS_ID
+#  $Filename:   makefile.bor
+#  $Author  :   John Pompeii
+#  $Revision:   1.1  $
+#  $Date:   28 Dec 1991 14:20:38  $
+# 
+# 	Copyright (c)	1995 by Secant Technologies
+#
+ 
+# SeeFont makefile for Borland C++ 
+# usage: make seefont.exe
+
+INCLUDE=$(BCBASE)\include
+INCLUDPM=$(OPMBASE)\include
+LIB=$(BCBASE)\lib
+LIBPM=$(OPMBASE)\lib
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-c -sm -v -V -Od -I$(INCLUDE) -I$(INCLUDPM) 
+TLFLAGS=-c -m -Toe -v   
+!ELSE
+CPPFLAGS=-c -sm -V -I$(INCLUDE) -I$(INCLUDPM)
+TLFLAGS=-c -m -Toe  
+!ENDIF
+
+.cpp.obj:
+    bcc $(CPPFLAGS) $*.cpp
+
+.rc.res:
+    brcc -r -fo$*.res -i$(BCBASE)\include $*.rc
+
+all: seefont.exe
+
+seefont.exe: seefont.obj seefont.res seefont.def
+    tlink $(TLFLAGS) $(LIB)\c02.obj seefont, seefont.exe, seefont.map, $(LIB)\c2mt1i.lib $(LIB)\os2.lib $(LIBPM)\opmbci.lib, seefont.def;
+    rc seefont.res
+
+seefont.res: seefont.rc dialogs.dlg dialogs.h
+

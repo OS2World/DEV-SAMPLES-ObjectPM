@@ -1,0 +1,16 @@
+/*  VCS_ID
+ *  $Filename:   mdiedit.rc
+ *  $Author  :   John Pompeii
+ *  $Revision:    $
+ *  $Date:   05 Feb 1992 16:33:34  $
+ *
+ *	Copyright (c)	1995 by Secant Technologies
+ *
+ */
+
+
+#include "mdidlg.h"
+
+POINTER I_DOC PRELOAD MOVEABLE document.ico
+
+rcinclude mdidlg.dlg

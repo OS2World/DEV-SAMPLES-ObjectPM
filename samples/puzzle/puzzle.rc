@@ -1,0 +1,15 @@
+/*  VCS_ID
+ *  $Filename:   puz.rc
+ *  $Author  :   John Pompeii
+ *  $Revision:    $
+ *  $Date:   05 Feb 1992 16:33:34  $
+ *
+ *	Copyright (c)	1995 by Secant Technologies
+ *
+ */
+
+
+#include "about.h"
+#include "puzzle.h"
+
+rcinclude about.dlg

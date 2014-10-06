@@ -1,0 +1,15 @@
+;  VCS_ID
+;   $Filename:   iolib.txt
+;   $Author  :   
+;   $Revision:    $
+;   $Date:   05 Feb 1992 16:33:34  $
+; 
+; 	Copyright (c)	1995 by Secant Technologies
+; 
+;
+; Error messages for the "IO" facility
+;
+EIO
+EIO0101H: File %1 not found.
+EIO0102H: Called method: %1 not implemented.
+

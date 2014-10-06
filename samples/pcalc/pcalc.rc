@@ -1,0 +1,35 @@
+/*  VCS_ID
+ *  $Filename:   pcalc.rc
+ *  $Author  :   Mike Flis
+ *  $Revision:    $
+ *  $Date:   05 Feb 1992 16:33:34  $
+ *
+ *	Copyright (c)	1995 by Secant Technologies
+ *
+ */
+
+
+#include "pcalcdlg.h"
+#ifndef WORKSHOP_INVOKED
+    #include <pmwin.h>
+#endif
+
+POINTER ID_ICON CALC.ICO
+
+DLGTEMPLATE ID_ABOUT LOADONCALL MOVEABLE DISCARDABLE 
+BEGIN
+    DIALOG "", ID_ABOUT, 17, 38, 166, 53, FS_NOBYTEALIGN | FS_DLGBORDER | 
+                WS_VISIBLE | WS_SAVEBITS
+    BEGIN
+        CONTROL "OK", DID_OK, 61, 3, 38, 14, WC_BUTTON, BS_PUSHBUTTON | 
+                WS_TABSTOP | WS_VISIBLE
+        CONTROL ID_ICON, ID_ICON, 9, 25, 21, 21, WC_STATIC, SS_ICON | WS_GROUP | 
+                WS_VISIBLE
+        CONTROL "Programmers Calculator", 259, 34, 36, 119, 8, WC_STATIC, 
+                SS_TEXT | DT_CENTER | DT_VCENTER | WS_GROUP | WS_VISIBLE
+        CONTROL "by Michael Flis  02/91", 260, 43, 26, 100, 8, WC_STATIC, SS_TEXT | 
+                DT_CENTER | DT_VCENTER | WS_GROUP | WS_VISIBLE
+    END
+END
+
+rcinclude pcalcdlg.dlg

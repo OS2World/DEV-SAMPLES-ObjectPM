@@ -1,0 +1,18 @@
+;  VCS_ID
+;   $Filename:   listea.def
+;   $Author  :   
+;   $Revision:    $
+;   $Date:   05 Feb 1992 16:33:34  $
+; 
+; 	Copyright (c)	1995 by Secant Technologies
+ 
+ 
+
+
+NAME           LISTEA WINDOWCOMPAT
+
+DESCRIPTION    'List Extended Attributes of a File -- Michael Flis' 
+PROTMODE
+HEAPSIZE       1024
+STACKSIZE      8192
+

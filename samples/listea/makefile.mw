@@ -1,0 +1,41 @@
+#   VCS_ID
+#  $Filename:   makefile.mw
+#  $Author  :   chas 
+#  $Revision:   1.1  $
+#  $Date:   25 Feb  1995 14:20:38  $
+# 
+# 	Copyright (c)	1995 by Secant Technologies
+#
+ 
+# Listea/Setea makefile for HighC  
+# usage: make listea.exe
+
+INCLUDE=$(HCDIR)\inc
+INCLUDEPM=$(OPMBASE)\include
+
+LIB=$(HCDIR)\lib
+LIBPM=$(OPMBASE)\lib
+HC=$(HCDIR)\bin\hc.exe
+
+LIBS=$(LIBPM)\bsehci $(LIB)\hcctd $(LIB)\hctd $(LIB)\hcna $(LIB)\os2386
+STARTUP=$(LIB)\startup $(LIB)\globinit
+
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-g -I$(INCLUDE) -I$(INCLUDEPM)
+LINKFLAGS=/noignore /noext /align:16 /pm:vio /debug /map
+!ELSE
+CPPFLAGS=-O -I$(INCLUDE) -I$(INCLUDEPM)
+LINKFLAGS=/noignore /noext /align:16 /pm:vio /packdata
+!ENDIF
+
+.cpp.obj:
+    $(HC) -c $(CPPFLAGS) $*.cpp
+
+all: listea.exe setea.exe
+
+listea.exe: listea.obj listea.def
+    link386 $(LINKFLAGS) listea $(STARTUP),,,$(LIBS);
+
+setea.exe: setea.obj setea.def
+    link386 $(LINKFLAGS) setea $(STARTUP),,,$(LIBS);
+

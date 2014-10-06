@@ -1,0 +1,38 @@
+#   VCS_ID
+#  $Filename:   makefile.bor
+#  $Author  :   John Pompeii
+#  $Revision:   1.1  $
+#  $Date:   28 Dec 1991 14:20:38  $
+# 
+# 	Copyright (c)	1995 by Secant Technologies
+#
+ 
+# Graph makefile for Borland C++ 
+# usage: make graph.exe
+
+INCLUDE=$(BCBASE)\include
+INCLUDPM=$(OPMBASE)\include
+LIB=$(BCBASE)\lib
+LIBPM=$(OPMBASE)\lib
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-c -sm -v -V -Od -I$(INCLUDE) -I$(INCLUDE)\sys -I$(INCLUDPM) 
+TLFLAGS=-c -m -Toe -v   
+!ELSE
+CPPFLAGS=-c -sm -V -I$(INCLUDE) -I$(INCLUDE)\sys -I$(INCLUDPM)
+TLFLAGS=-c -m -Toe  
+!ENDIF
+
+.cpp.obj:
+    bcc $(CPPFLAGS) $*.cpp
+
+.rc.res:
+    brcc -r -fo$*.res -i$(BCBASE)\include $*.rc
+
+all: graph.exe
+
+graph.exe: graph.obj printdlg.obj graph.res graph.def
+    tlink $(TLFLAGS) $(LIB)\c02.obj graph printdlg, graph.exe, graph.map, $(LIB)\c2mt1i $(LIB)\os2 $(LIBPM)\opmb_i, graph.def;
+    rc graph.res
+
+graph.res: about.dlg printdlg.dlg
+

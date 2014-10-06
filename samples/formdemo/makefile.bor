@@ -1,0 +1,43 @@
+#   VCS_ID
+#  $Filename:   makefile.bor
+#  $Author  :   John Pompeii
+#  $Revision:   1.1  $
+#  $Date:   28 Dec 1991 14:20:38  $
+# 
+# 	Copyright (c)	1995 by Secant Technologies
+#
+ 
+# FormDemo makefile for Borland C++ 
+# usage: make formdemo.exe
+
+INCLUDE=$(BCBASE)\include
+INCLUDPM=$(OPMBASE)\include
+LIB=$(BCBASE)\lib
+LIBPM=$(OPMBASE)\lib
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-c -sm -v -V -Od -I$(INCLUDE) -I$(INCLUDE)\sys -I$(INCLUDPM) 
+TLFLAGS=-c -m -Toe -v   
+!ELSE
+CPPFLAGS=-c -sm -V -I$(INCLUDE) -I$(INCLUDPM)
+TLFLAGS=-c -m -Toe  
+!ENDIF
+
+.cpp.obj:
+    bcc $(CPPFLAGS) $*.cpp
+
+.rc.res:
+    brcc -r -fo$*.res -i$(BCBASE)\include $*.rc
+
+.ipf.hlp:
+    ipfc $*.ipf
+
+all: formdemo.exe formdemo.hlp
+
+formdemo.exe: formdemo.obj formdemo.res formdemo.def
+    tlink $(TLFLAGS) $(LIB)\c02 formdemo, formdemo, formdemo, $(LIB)\c2mt1i $(LIB)\os2 $(LIBPM)\opmbci, formdemo.def;
+    rc formdemo.res
+
+formdemo.res: formdemo.rc  
+
+formdemo.hlp: formdemo.ipf
+

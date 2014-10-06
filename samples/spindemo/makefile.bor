@@ -1,0 +1,32 @@
+#   VCS_ID
+#  $Filename:   makefile.bor
+#  $Author  :   John Pompeii
+#  $Revision:   1.1  $
+#  $Date:   28 Dec 1991 14:20:38  $
+# 
+# 	Copyright (c)	1995 by Secant Technologies
+#
+ 
+# Spindemo makefile for Borland C++ 
+# usage: make spindemo.exe
+
+INCLUDE=$(BCBASE)\include
+INCLUDPM=$(OPMBASE)\include
+LIB=$(BCBASE)\lib
+LIBPM=$(OPMBASE)\lib
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-c -sm -v -V -Od -I$(INCLUDE) -I$(INCLUDPM) 
+TLFLAGS=-c -m -Toe -v   
+!ELSE
+CPPFLAGS=-c -sm -V -I$(INCLUDE) -I$(INCLUDPM)
+TLFLAGS=-c -m -Toe  
+!ENDIF
+
+.cpp.obj:
+    bcc $(CPPFLAGS) $*.cpp
+
+all: spindemo.exe
+
+spindemo.exe: spindemo.obj spindemo.def
+    tlink $(TLFLAGS) $(LIB)\c02 spindemo, spindemo, spindemo, $(LIB)\c2mt1i $(LIB)\os2 $(LIBPM)\opmbci, spindemo.def;
+

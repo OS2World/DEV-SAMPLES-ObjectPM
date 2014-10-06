@@ -1,0 +1,38 @@
+#   VCS_ID
+#  $Filename:   makefile.bor
+#  $Author  :   John Pompeii
+#  $Revision:   1.1  $
+#  $Date:   28 Dec 1991 14:20:38  $
+# 
+# 	Copyright (c)	1995 by Secant Technologies
+#
+ 
+# PhoneBook makefile for Borland C++ 
+# usage: make phbook.exe
+
+INCLUDE=$(BCBASE)\include
+INCLUDPM=$(OPMBASE)\include
+LIB=$(BCBASE)\lib
+LIBPM=$(OPMBASE)\lib
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-c -sm -v -V -Od -I$(INCLUDE) -I$(INCLUDE)\sys -I$(INCLUDPM) 
+TLFLAGS=-c -m -Toe -v   
+!ELSE
+CPPFLAGS=-c -sm -V -I$(INCLUDE) -I$(INCLUDE)\sys -I$(INCLUDPM)
+TLFLAGS=-c -m -Toe  
+!ENDIF
+
+.cpp.obj:
+    bcc $(CPPFLAGS) $*.cpp
+
+.rc.res:
+    brcc -r -fo$*.res -i$(BCBASE)\include $*.rc
+
+all: phbook.exe
+
+phbook.exe: phbook.obj phedit.obj phdata.obj recfile.obj phbook.res phbook.def
+    tlink $(TLFLAGS) $(LIB)\c02 phbook phedit phdata recfile, phbook, phbook, $(LIB)\c2mt1i $(LIB)\os2 $(LIBPM)\opmbci, phbook.def;
+    rc phbook.res
+
+phbook.res: phbook.rc phbook.h
+

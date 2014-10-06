@@ -1,0 +1,20 @@
+;  VCS_ID
+;   $Filename:   seefont.def
+;   $Author  :   
+;   $Revision:    $
+;   $Date:   05 Feb 1992 16:33:34  $
+; 
+; 	Copyright (c)	1995 by Secant Technologies
+ 
+ 
+
+
+NAME    SEEFONT WINDOWAPI
+
+DESCRIPTION 'Outline Font Demo Program' 
+
+CODE    MOVEABLE
+DATA    MOVEABLE MULTIPLE
+
+HEAPSIZE  4096
+STACKSIZE 16000

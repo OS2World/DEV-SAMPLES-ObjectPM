@@ -1,0 +1,15 @@
+/*  VCS_ID
+ *  $Filename:   seefont.rc
+ *  $Author  :   John Pompeii & Mike Flis
+ *  $Revision:    $
+ *  $Date:   05 Feb 1992 16:33:34  $
+ *
+ *	Copyright (c)	1995 by Secant Technologies
+ *
+ */
+
+
+#include <os2.h>
+#include "dialogs.h"
+
+rcinclude dialogs.dlg

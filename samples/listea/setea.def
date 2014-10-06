@@ -1,0 +1,18 @@
+;  VCS_ID
+;   $Filename:   setea.def
+;   $Author  :   
+;   $Revision:    $
+;   $Date:   05 Feb 1992 16:33:34  $
+; 
+; 	Copyright (c)	1995 by Secant Technologies
+ 
+ 
+
+
+NAME           SETEA WINDOWCOMPAT
+
+DESCRIPTION    'Set an Extended Attribute of a File -- Michael Flis' 
+PROTMODE
+HEAPSIZE       1024
+STACKSIZE      8192
+

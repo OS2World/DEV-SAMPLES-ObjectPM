@@ -1,0 +1,36 @@
+#   VCS_ID
+#  $Filename:   makefile.bor
+#  $Author  :   John Pompeii
+#  $Revision:   1.1  $
+#  $Date:   28 Dec 1991 14:20:38  $
+# 
+# 	Copyright (c)	1995 by Secant Technologies
+#
+ 
+# Listea/Setea makefile for Borland C++ 
+# usage: make all
+
+INCLUDE=$(BCBASE)\include
+INCLUDPM=$(OPMBASE)\include
+LIB=$(BCBASE)\lib
+LIBPM=$(OPMBASE)\lib
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-c -sm -v -V -Od -I$(INCLUDE) -I$(INCLUDE)\sys -I$(INCLUDPM) 
+TLFLAGS=-c -m -Toe -v   
+!ELSE
+CPPFLAGS=-c -sm -V -I$(INCLUDE) -I$(INCLUDE)\sys -I$(INCLUDPM)
+TLFLAGS=-c -m -Toe  
+!ENDIF
+
+.cpp.obj:
+    bcc $(CPPFLAGS) $*.cpp
+
+all: listea.exe setea.exe
+
+listea.exe: listea.obj listea.def
+    tlink $(TLFLAGS) $(LIB)\c02 listea, listea, listea, $(LIB)\c2mt1i $(LIB)\os2 $(LIBPM)\opmbci, listea.def;
+
+setea.exe: setea.obj setea.def
+    tlink $(TLFLAGS) $(LIB)\c02 setea, setea, setea, $(LIB)\c2mt1i $(LIB)\os2 $(LIBPM)\opmbci, setea.def;
+
+

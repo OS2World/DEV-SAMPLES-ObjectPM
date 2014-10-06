@@ -1,0 +1,49 @@
+#   VCS_ID
+#  $Filename:   makefilebor
+#  $Author  :   John Pompeii
+#  $Revision:   1.1  $
+#  $Date:   28 Dec 1991 14:20:38  $
+# 
+# 	Copyright (c)	1995 by Secant Technologies
+# 
+
+ 
+# ErrorDemo makefile for Borland C++ 
+# usage: make errdemo.exe
+
+INCLUDE=$(BCBASE)\include
+INCLUDPM=$(OPMBASE)\include
+LIB=$(BCBASE)\lib
+LIBPM=$(OPMBASE)\lib
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-c -sm -v -V -Od -I$(INCLUDE) -I$(INCLUDPM) 
+TLFLAGS=-c -m -Toe -v   
+!ELSE
+CPPFLAGS=-c -sm -V -I$(INCLUDE) -I$(INCLUDPM)
+TLFLAGS=-c -m -Toe  
+!ENDIF
+
+.cpp.obj:
+    bcc $(CPPFLAGS) $*.cpp
+
+.rc.res:
+    brcc -r -fo$*.res -i$(BCBASE)\include -i$(OPMBASE)\include $*.rc
+
+.ipf.hlp:
+    ipfc $*.ipf
+
+.txt.msg:
+    mkmsgf $*.txt $*.msg
+
+all: errdemo.exe errdemo.msg errdemo.hlp
+
+errdemo.exe: errdemo.obj errhandl.obj errdemo.res errdemo.def  
+    tlink $(TLFLAGS) $(LIB)\c02 errdemo errhandl, errdemo, errdemo, $(LIB)\c2mt1i $(LIB)\os2 $(LIBPM)\opmbci, errdemo.def;
+    rc errdemo.res
+
+errdemo.res: errdemo.rc about.dlg about.h errdemo.h
+
+errdemo.msg: errdemo.txt
+
+errdemo.hlp: errdemo.ipf
+

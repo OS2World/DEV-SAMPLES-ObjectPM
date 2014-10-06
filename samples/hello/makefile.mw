@@ -1,0 +1,42 @@
+#   VCS_ID
+#  $Filename:   makefile.mw
+#  $Author  :   chas 
+#  $Revision:   1.1  $
+#  $Date:   25 Feb  1995 14:20:38  $
+#
+ 
+# Hello makefile for HighC  
+# usage: make hello.exe
+
+INCLUDE=$(HCDIR)\inc
+INCLUDEPM=$(OPMBASE)\include
+
+LIB=$(HCDIR)\lib
+LIBPM=$(OPMBASE)\lib
+HC=$(HCDIR)\bin\hc.exe
+
+LIBS=$(LIBPM)\opmhci $(LIB)\hcctd $(LIB)\hctd $(LIB)\hcna $(LIB)\os2386
+STARTUP=$(LIB)\startup $(LIB)\globinit
+
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-g -I$(INCLUDE) -I$(INCLUDEPM)
+LINKFLAGS=/noignore /noext /align:16 /pm:pm /co /map
+!ELSE
+CPPFLAGS=-O -I$(INCLUDE) -I$(INCLUDEPM)
+LINKFLAGS=/noignore /noext /align:16 /pm:pm /packdata
+!ENDIF
+
+.cpp.obj:
+    $(HC) -c $(CPPFLAGS) $*.cpp
+
+.rc.res:
+    rc -r -i $(INCLUDEPM) -i $(INCLUDE)\os2 $*.rc $*.res
+
+all: hello.exe
+
+hello.exe: hello.obj hello.res
+    link386 $(LINKFLAGS) $(STARTUP) hello,hello,,$(LIBS);
+    rc hello.res
+
+hello.res: hello.rc hello.h
+

@@ -1,0 +1,38 @@
+#   VCS_ID
+#  $Filename:   makefile.bor
+#  $Author  :   John Pompeii
+#  $Revision:   1.1  $
+#  $Date:   28 Dec 1991 14:20:38  $
+#
+ 
+# Hello makefile for Borland C++ 
+# usage: make hello.exe
+
+INCLUDE=$(BCBASE)\include
+INCLUDPM=$(OPMBASE)\include
+LIB=$(BCBASE)\lib
+LIBPM=$(OPMBASE)\lib
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-c -sm -v -V -Od -I$(INCLUDE) -I$(INCLUDPM)
+OPMLIB=opmb_i 
+TLFLAGS=-c -m -Toe -v   
+!ELSE
+CPPFLAGS=-c -sm -V -I$(INCLUDE) -I$(INCLUDPM)
+TLFLAGS=-c -m -Toe  
+OPMLIB=opmbci 
+!ENDIF
+
+.cpp.obj:
+    bcc $(CPPFLAGS) $*.cpp
+
+.rc.res:
+    brcc -r -fo$*.res -i$(BCBASE)\include $*.rc
+
+all: hello.exe
+
+hello.exe: hello.obj hello.res hello.def
+    tlink $(TLFLAGS) $(LIB)\c02 hello, hello, hello, $(LIB)\c2mt1i $(LIB)\os2 $(LIBPM)\$(OPMLIB), hello.def;
+    rc hello.res
+
+hello.res: hello.rc hello.h
+

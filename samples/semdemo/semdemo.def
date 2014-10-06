@@ -1,0 +1,17 @@
+;  VCS_ID
+;   $Filename:   semdemo.def
+;   $Author  :   
+;   $Revision:    $
+;   $Date:   05 Feb 1992 16:33:34  $
+; 
+; 	Copyright (c)	1995 by Secant Technologies
+ 
+ 
+NAME    SEMDEMO WINDOWAPI
+
+DESCRIPTION 'Semdemo Demo Program' 
+
+CODE    MOVEABLE
+DATA    MOVEABLE MULTIPLE
+
+STACKSIZE 16000

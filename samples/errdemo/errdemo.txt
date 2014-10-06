@@ -1,0 +1,19 @@
+;  VCS_ID
+;   $Filename:   errdemo.txt
+;   $Author  :   
+;   $Revision:    $
+;   $Date:   05 Feb 1992 16:33:34  $
+; 
+; 	Copyright (c)	1995 by Secant Technologies
+; 
+;
+; Error messages for ErrDemo
+;
+ERR
+ERR0001H: Corrupted %1 detected.  Application cannot continue.
+ERR0002H: Cannot initialize the IO Sub-system %1
+ERR0003H: Cannot Open %1
+ERR0004H: Resource %1 is not available now
+ERR0005H: General failure: %1
+ERR0006W: Guess what? %1
+

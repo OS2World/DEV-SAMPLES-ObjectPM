@@ -1,0 +1,20 @@
+;  VCS_ID
+;   $Filename:   graph.def
+;   $Author  :   
+;   $Revision:    $
+;   $Date:   05 Feb 1992 16:33:34  $
+; 
+; 	Copyright (c)	1995 by Secant Technologies
+ 
+ 
+
+
+NAME    GRAPH WINDOWAPI
+
+DESCRIPTION 'Graphics Demo Program' 
+
+CODE    MOVEABLE
+DATA    MOVEABLE MULTIPLE
+
+HEAPSIZE  8000
+STACKSIZE 16000

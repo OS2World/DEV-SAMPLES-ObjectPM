@@ -1,0 +1,55 @@
+#   VCS_ID
+#  $Filename:   makefile.mw
+#  $Author  :   chas 
+#  $Revision:   1.1  $
+#  $Date:   25 Feb  1995 14:20:38  $
+# 
+# 	Copyright (c)	1995 by Secant Technologies
+# 
+
+ 
+# ErrorDemo makefile for HighC  
+# usage: make errdemo.exe
+
+INCLUDE=$(HCDIR)\inc
+INCLUDEPM=$(OPMBASE)\include
+
+LIB=$(HCDIR)\lib
+LIBPM=$(OPMBASE)\lib
+HC=$(HCDIR)\bin\hc.exe
+
+LIBS=$(LIBPM)\opmhci $(LIB)\hcctd $(LIB)\hctd $(LIB)\hcna $(LIB)\os2386
+STARTUP=$(LIB)\startup $(LIB)\globinit
+
+!IF "$(DEBUG)" == "ON"
+CPPFLAGS=-g -I$(INCLUDE) -I$(INCLUDEPM)
+LINKFLAGS=/noignore /noext /align:16 /pm:pm /debug /map
+!ELSE
+CPPFLAGS=-O -I$(INCLUDE) -I$(INCLUDEPM)
+LINKFLAGS=/noignore /noext /align:16 /pm:pm /packdata
+!ENDIF
+
+.cpp.obj:
+    $(HC) -c $(CPPFLAGS) $*.cpp
+
+.rc.res:
+    rc -r -i $(INCLUDEPM) -i $(INCLUDE)\os2 $*.rc $*.res
+
+.ipf.hlp:
+    ipfc $*.ipf
+
+.txt.msg:
+    mkmsgf $*.txt $*.msg
+
+all: errdemo.exe errdemo.msg errdemo.hlp
+
+errdemo.exe: errdemo.obj errhandl.obj errdemo.res errdemo.def 
+    link386 $(LINKFLAGS) errdemo errhandl $(STARTUP),,,$(LIBS);
+    rc errdemo.res
+
+errdemo.res: errdemo.rc about.dlg about.h errdemo.h
+
+errdemo.msg: errdemo.txt
+
+errdemo.hlp: errdemo.ipf
+

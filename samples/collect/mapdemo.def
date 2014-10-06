@@ -1,0 +1,16 @@
+;  VCS_ID
+;   $Filename:   mapdemo.def
+;   $Author  :   Jeff Knaus
+;   $Revision:    $
+;   $Date:   05 Feb 1992 16:33:34  $
+; 
+; 	Copyright (c)	1995 by Secant Technologies
+ 
+ 
+NAME           MAPDEMO WINDOWCOMPAT
+
+DESCRIPTION    'Mapping Demo Program' 
+PROTMODE
+HEAPSIZE       1024
+STACKSIZE      8192
+

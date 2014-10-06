@@ -1,0 +1,15 @@
+;  VCS_ID
+;   $Filename:   except.def
+;   $Author  :   chas 
+;   $Revision:    $
+;   $Date:   05 Feb 1992 16:33:34  $
+; 
+; 	Copyright (c)	1995 by Secant Technologies
+
+NAME           EXCEPT WINDOWCOMPAT
+
+DESCRIPTION    'Exception Handling Demo Program'
+PROTMODE
+HEAPSIZE       1024
+STACKSIZE      4096
+

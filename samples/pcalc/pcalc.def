@@ -1,0 +1,23 @@
+;  VCS_ID
+;   $Filename:   pcalc.def
+;   $Author  :   
+;   $Revision:    $
+;   $Date:   05 Feb 1992 16:33:34  $
+; 
+; 	Copyright (c)	1995 by Secant Technologies
+ 
+ 
+
+
+NAME           PCALC     WINDOWAPI
+
+DESCRIPTION    'Programmers Calculator -- Michael Flis 1991'
+PROTMODE
+HEAPSIZE       4096
+STACKSIZE      16000
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+/*  VCS_ID
+ *  $Filename:   graph.rc
+ *  $Author  :   John Pompeii
+ *  $Revision:   1.1  $
+ *  $Date:   28 Dec 1991 14:18:30  $
+ *
+ *	Copyright (c)	1995 by Secant Technologies
+ *
+ */
+ 
+#include "about.h"
+#include "graph.h"
+#include "printdlg.h"
+
+rcinclude about.dlg
+rcinclude printdlg.dlg

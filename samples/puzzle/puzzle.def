@@ -1,0 +1,20 @@
+;  VCS_ID
+;   $Filename:   puzzle.def
+;   $Author  :   
+;   $Revision:    $
+;   $Date:   05 Feb 1992 16:33:34  $
+; 
+; 	Copyright (c)	1995 by Secant Technologies
+ 
+ 
+
+
+NAME    PUZ WINDOWAPI
+
+DESCRIPTION 'Puzzle Demo Program' 
+
+CODE    MOVEABLE
+DATA    MOVEABLE MULTIPLE
+
+HEAPSIZE  8000
+STACKSIZE 8000
